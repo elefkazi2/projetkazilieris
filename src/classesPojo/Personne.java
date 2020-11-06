@@ -1,6 +1,5 @@
 package classesPojo;
 
-import Frame.*;
 import dao.*;
 
 public class Personne {
@@ -62,27 +61,8 @@ public class Personne {
 	public void setAdresse(String n) {
 		adresse=n;
 	}
-	public void login(String n,String p) {
-		switch(persondao.logindao(n,p)) {
-		case "client" :
-			client c=new client();
-			c.setVisible(true);
-			connexionouregister i=new connexionouregister();
-			i.setVisible(false);
-			break;
-		case "gestionnaire":
-			gestionnaire g=new gestionnaire();
-			g.setVisible(true);
-			break;
-		case "organisateur":
-			organisateur o=new organisateur();
-			o.setVisible(true);
-			break;
-		case "artiste":
-			artiste a=new artiste();
-			a.setVisible(true);
-			break;
-		}
+	public String login(String n,String p) {
+		return persondao.logindao(n,p);
 	}
 	public void register(String nu,String n,String pr,String ad,String pa,String r) {
 		Personne p=new Personne(nu,n,pr,ad,pa,r);

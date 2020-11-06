@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import java.awt.Font;
 
 public class gestionnaire extends JFrame {
 
@@ -23,7 +24,7 @@ public class gestionnaire extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gestionnaire frame = new gestionnaire();
+					connexionouregister frame = new connexionouregister();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,17 +35,20 @@ public class gestionnaire extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param nom_ut 
 	 */
-	public gestionnaire() {
+	public gestionnaire(String nom_ut) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("gest");
-		contentPane.add(lblNewLabel, BorderLayout.CENTER);
+		JLabel lblnomutrecup = new JLabel(nom_ut);
+		lblnomutrecup.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		lblnomutrecup.setBounds(10, 11, 87, 25);
+		contentPane.add(lblnomutrecup);
 	}
 
 }

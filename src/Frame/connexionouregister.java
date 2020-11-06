@@ -29,12 +29,13 @@ public class connexionouregister extends JFrame {
 	private JTextField textField1;
 	private JTextField textField2;
 	private JPasswordField passwordField;
-	private JPasswordField passwordField2;
-	Personne p=new Personne();
-	Client c=new Client();
+	private JPasswordField passwordField2;	
 	private JTextField txtnom;
 	private JTextField txtpreenr;
 	private JTextField txtaddr;
+	private String nom_ut;
+	Personne p=new Personne();
+	Client c=new Client();
 	/**
 	 * Launch the application.
 	 */
@@ -58,8 +59,6 @@ public class connexionouregister extends JFrame {
 	public void fermer() {
 		this.setVisible(false);
 	}
-	
-
 	/**
 	 * Create the frame.
 	 */
@@ -116,9 +115,30 @@ public class connexionouregister extends JFrame {
 		btnconnecter.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
+				
 				try {
-					p.login(textField1.getText(), passwordField.getText());
-					fermer();//fermer cette fenetre avec methode en haut
+					switch(p.login(textField1.getText(),passwordField.getText())) {
+					case "client" :
+						client c=new client(textField1.getText());
+						c.setVisible(true);
+						fermer();//fermer cette fenetre avec methode en haut
+						break;
+					case "gestionnaire":
+						gestionnaire g=new gestionnaire(textField1.getText());
+						g.setVisible(true);
+						fermer();
+						break;
+					case "organisateur":
+						organisateur o=new organisateur(textField1.getText());
+						o.setVisible(true);
+						fermer();
+						break;
+					case "artiste":
+						artiste a=new artiste();
+						a.setVisible(true);
+						fermer();
+						break;
+					}					
 				}
 				catch(Exception ex) {				
 					textField1.setText(null);

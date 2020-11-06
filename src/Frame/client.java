@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class client extends JFrame {
 
@@ -22,7 +24,7 @@ public class client extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					client frame = new client();
+					connexionouregister frame = new connexionouregister();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,13 +36,17 @@ public class client extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public client() {
+	public client(String nom_ut) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblnomutrecup = new JLabel(nom_ut);
+		lblnomutrecup.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		lblnomutrecup.setBounds(10, 26, 108, 40);
+		contentPane.add(lblnomutrecup);
 	}
-
 }
