@@ -62,10 +62,10 @@ public class Personne {
 		adresse=n;
 	}
 	public String login(String n,String p) {
-		return persondao.logindao(n,p);
+		return persondao.find(n,p);
 	}
 	public void register(String nu,String n,String pr,String ad,String pa,String r) {
 		Personne p=new Personne(nu,n,pr,ad,pa,r);
-		persondao.register(p);		
+		persondao.create(p);		
 	}
 }
