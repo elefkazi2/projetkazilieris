@@ -10,12 +10,12 @@ protected Connection connect = null;
 		this.connect = conn;
 	}
 	
-	public abstract boolean register(T obj);
+	public abstract boolean create(T obj);
 	
 	public abstract boolean delete(T obj);
 	
 	public abstract boolean update(T obj,String s);
 	
-	public abstract String logindao(String n,String p);
+	public abstract String find(String n,String p);
 
 }

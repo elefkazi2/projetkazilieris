@@ -10,7 +10,7 @@ public class PersonDao extends DAO<Personne>{
 	public PersonDao(Connection conn) {
 		super(conn);
 	}
-	public boolean register(Personne obj) {
+	public boolean create(Personne obj) {
 		try{
 			String insertion = "INSERT INTO person(nom_utilisateur,nom,prenom,adresse,password,role) values ('"+obj.getnu()+"','" + obj.getn()+ "','"+obj.getpr()+"',"
 					+"'"+obj.getAdresse()+"','"+obj.getpa()+"','"+obj.getr()+"')";
@@ -48,7 +48,7 @@ public class PersonDao extends DAO<Personne>{
 		}
 		return false;
 	}
-	public String logindao(String n,String p) {
+	public String find(String n,String p) {
 		String r = null;
 		try{
 			ResultSet result = this.connect.createStatement(
