@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.*;
+import java.util.List;
 
 
 public abstract class DAO<T> {
@@ -16,6 +17,10 @@ protected Connection connect = null;
 	
 	public abstract boolean update(T obj,String s);
 	
-	public abstract String find(String n,String p);
+	public abstract List<String> find(String n,String p);
+	
+	public abstract T find(int id);
+	
+	public abstract int find();
 
 }

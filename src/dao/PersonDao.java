@@ -3,6 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import classesPojo.*;
 
 public class PersonDao extends DAO<Personne>{
@@ -48,20 +51,36 @@ public class PersonDao extends DAO<Personne>{
 		}
 		return false;
 	}
-	public String find(String n,String p) {
+	public List<String> find(String n,String p) {
+	List<String> listA = new ArrayList<>();
 		String r = null;
+		int g=0;
 		try{
 			ResultSet result = this.connect.createStatement(
 				ResultSet.TYPE_SCROLL_INSENSITIVE,
 	ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Person WHERE nom_utilisateur = '" +n+"' and password ='"+p+"'");
-			if(result.first()) {
+			if(result.first()) {	
 				r=result.getString("role");
+				g=result.getInt("id");
+				String d=String.valueOf(g);
+			  listA.add(r);
+			  listA.add(d);
 			}
 		}
 		catch(SQLException e){
 			e.printStackTrace();
 		}
-		return r;
+		return listA;
+	}
+	@Override
+	public Personne find(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int find() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

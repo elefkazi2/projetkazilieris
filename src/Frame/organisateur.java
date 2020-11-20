@@ -1,6 +1,5 @@
 package Frame;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -40,6 +39,8 @@ public class organisateur extends JFrame {
 	public organisateur(String nom_ut) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setTitle("SalleBosquetWallon/Organisateur/"+nom_ut);
+		setSize(900,700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

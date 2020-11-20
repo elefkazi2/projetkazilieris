@@ -1,8 +1,13 @@
 package classesPojo;
+
+import java.util.HashSet;
+import java.util.Set;
+
 public class Client extends Personne{
 	
 	private int nbre_com;
-	Commande tab_commande[];
+	//Commande tab_commande[];
+	private Set<Commande> listcommande =new HashSet<>();
 	
 	public Client() {}
 	/*public Client(String n,String p,String a,int nbr_commax) {
@@ -16,7 +21,10 @@ public class Client extends Personne{
 	public void register(String nu,String n,String pr,String ad,String pa) {
 		super.register(nu, n, pr,ad, pa, "client");		
 	}
-	public void passercommandeclient(Commande c) {
+	public  Set<Commande> getcomm(){
+		return listcommande;
+	}
+	/*public void passercommandeclient(Commande c) {
 		if(nbre_com<tab_commande.length) {
 			tab_commande[nbre_com++]=c;
 		}
@@ -32,5 +40,5 @@ public class Client extends Personne{
 				System.out.println(tab_commande[i]);
 			}
 		}
-	}
+	}*/
 }

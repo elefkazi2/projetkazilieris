@@ -1,5 +1,7 @@
 package classesPojo;
 
+import java.util.List;
+
 import dao.*;
 
 public class Personne {
@@ -11,6 +13,7 @@ public class Personne {
 	private String adresse;
 	private String password;
 	private String role;
+	private Commande commande;
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Personne> persondao = adf.getp();
 	
@@ -52,6 +55,9 @@ public class Personne {
 	public String getr() {
 		return role;
 	}
+	public Commande getc() {
+		return commande;
+	}
 	public void setn(String s) {
 		nom=s;
 	}
@@ -61,7 +67,7 @@ public class Personne {
 	public void setAdresse(String n) {
 		adresse=n;
 	}
-	public String login(String n,String p) {
+	public List<String> login(String n,String p) {		
 		return persondao.find(n,p);
 	}
 	public void register(String nu,String n,String pr,String ad,String pa,String r) {

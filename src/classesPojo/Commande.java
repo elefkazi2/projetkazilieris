@@ -1,25 +1,56 @@
 package classesPojo;
 
+import java.util.List;
+
+import dao.AbstractDAOFactory;
+import dao.DAO;
+
 public class Commande {
 	
+	private int id;
 	private String modelivraison;
 	private String modepayement;
-	//a retourner voir dans le diagdeclasse pour rajouter cout car je sais pas encore comment le mettre
+	private double cout;
+	private int id_cli;
 	Place place;
+	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+	DAO<Commande> commandedao =adf.getc();
 	
 	public Commande() {}
-	public Commande(String ml,String mp,Place p) {
+	public Commande(String ml,String mp/*,Place p*/,int ic) {
 	
 		modelivraison=ml;
 		modepayement=mp;
-		place=p;
+		//place=p;
+		id_cli=ic;
 	}
-	@Override
-	public String toString() {
-		if(place.getPlacenomb()>place.getPlaceMax()) {
-			return "vous ne pouvez pas prendre autant de places ";
-		}
-		return "il a passé comme commande avec un mode livraison : "+modelivraison+" et un mode payement : "+modepayement+" "+place;
-		//en mettant place la ca reprend le tostring de sa classe car je l ai instancie dans le main
+	public int getid() {
+		return id;
+	}
+	public String getml() {
+		return modelivraison;
+	}
+	public String getmp() {
+		return modepayement;
+	}
+	public int getidclient() {
+		return id_cli;
+	}
+	public void setidclient(int i) {
+		id_cli=i;
+	}
+	public Place getplacom() {
+		return place;
+	}
+	public void reservation_client(int idc,int nbre_place,String ml,String mp,int idrep) {
+		Commande c =new Commande(ml,mp,idc);
+		commandedao.create(c);
+	}
+	public int recup_dernier_comm(){
+		return commandedao.find();
 	}	
+	public double getcout(String typecat, String idrep,int nbreplace) {
+		int y=place.getprix(typecat, idrep);		
+		return (double) y*nbreplace;
+	}
 }
