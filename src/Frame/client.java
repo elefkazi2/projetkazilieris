@@ -5,20 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 import java.awt.Color;
-import java.awt.Dimension;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.beans.Visibility;
-import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -31,8 +27,9 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextPane;
+import javax.swing.JTextField;
 
-public class client extends JFrame implements ListSelectionListener {
+public class client extends JFrame {
 
 	/**
 	 * 
@@ -40,14 +37,18 @@ public class client extends JFrame implements ListSelectionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private JTable table_mesreserv;
 	private JLabel lblnumrep;
 	private JLabel lbltitre;
 	private JTextPane txtpnexpli;
+	private JLabel lblconfig;
+	private JLabel lblplace;
 	Representation rep=new Representation();
 	Spectacle spec=new Spectacle();
 	Commande com=new Commande();
 	Place place=new Place();
+	private JTextField txtnintro;
+	private JTextField txttitreintro;
+	private JTextField txtconfigintro;
 	
 
 	/**
@@ -108,7 +109,7 @@ public class client extends JFrame implements ListSelectionListener {
 		listespectrep.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(31, 119, 820, 437);
+		scrollPane.setBounds(31, 148, 820, 304);
 		listespectrep.add(scrollPane);
 		
 		table = new JTable();
@@ -116,7 +117,7 @@ public class client extends JFrame implements ListSelectionListener {
 			new Object[][] {
 			},
 			new String[] {
-				"n\u00B0", "titre", "date", "heure d\u00E9but", "artiste(s)", "configuration"
+				"n\u00B0", "titre", "date", "heure d\u00E9but","configuration"
 			}
 		) {
 			/**
@@ -124,7 +125,7 @@ public class client extends JFrame implements ListSelectionListener {
 			 */
 			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
-				true, true, true, true, true, false
+				false, false,false, false,false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -134,12 +135,57 @@ public class client extends JFrame implements ListSelectionListener {
 		
 		txtpnexpli = new JTextPane();
 		txtpnexpli.setForeground(new Color(0, 0, 0));
-		txtpnexpli.setFont(new Font("Tahoma", Font.ITALIC, 22));
-		txtpnexpli.setText("Cliquez sur le N\u00B0 de la repr\u00E9sentation que vous souhaitez r\u00E9server.Ensuite, allez dans l'onglet \r\nr\u00E9server pour continuer votre r\u00E9servation.");
-		txtpnexpli.setBounds(31, 21, 820, 87);
+		txtpnexpli.setFont(new Font("Tahoma", Font.BOLD, 22));
+		txtpnexpli.setText("Veuillez noter le N\u00B0,le titre et la configuration de la repr\u00E9sentation que vous souhaitez r\u00E9server dans les champs appropri\u00E9s en bas du tableau des repr\u00E9sentations.Ensuite, allez dans l'onglet R\u00E9server pour continuer votre r\u00E9servation.");
+		txtpnexpli.setBounds(31, 11, 820, 109);
 		listespectrep.add(txtpnexpli);
 		
-		for(int i = 1; i < 15; i++) {
+		JLabel lblNewLabel_3 = new JLabel("N\u00B0 :");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 18));
+		lblNewLabel_3.setBounds(10, 491, 46, 39);
+		listespectrep.add(lblNewLabel_3);
+		
+		txtnintro = new JTextField();
+		txtnintro.setBounds(83, 491, 86, 39);
+		listespectrep.add(txtnintro);
+		txtnintro.setColumns(10);
+		
+		JLabel lblNewLabel_4 = new JLabel("Titre\r\n :");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_4.setBounds(204, 491, 64, 39);
+		listespectrep.add(lblNewLabel_4);
+		
+		txttitreintro = new JTextField();
+		txttitreintro.setBounds(262, 494, 239, 39);
+		listespectrep.add(txttitreintro);
+		txttitreintro.setColumns(10);
+		
+		JLabel lblNewLabel_5 = new JLabel("configuration :");
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_5.setBounds(523, 491, 119, 39);
+		listespectrep.add(lblNewLabel_5);
+		
+		txtconfigintro = new JTextField();
+		txtconfigintro.setBounds(652, 494, 199, 39);
+		listespectrep.add(txtconfigintro);
+		txtconfigintro.setColumns(10);
+		
+		JButton btnNewButton_1 = new JButton("Continuer");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+					lblnumrep.setText(txtnintro.getText());
+					lbltitre.setText(txttitreintro.getText());
+					lblconfig.setText(txtconfigintro.getText());
+					tabbedPane.setSelectedIndex(1);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 23));
+		btnNewButton_1.setBounds(288, 562, 264, 58);
+		listespectrep.add(btnNewButton_1);
+		
+		
+		for(int i = 1; i <25; i++) {
 		Representation rep1=new Representation();
 	    rep1=rep.toute_les_representations(i);
 		if(rep1.getidr()!=0) {
@@ -148,27 +194,23 @@ public class client extends JFrame implements ListSelectionListener {
 		model.addRow(row);
 			}
 		 }
-		
-		ListSelectionModel listModel = table.getSelectionModel();
-	    listModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	    listModel.addListSelectionListener(this);
 	    
 		JPanel panreserv = new JPanel();
 		panreserv.setBackground(Color.ORANGE);
 		tabbedPane.addTab("R\u00E9server", null, panreserv, null);
 		panreserv.setLayout(null);
 		
-		lblnumrep = new JLabel("New label");
+		lblnumrep = new JLabel("");
 		lblnumrep.setFont(new Font("Tahoma", Font.ITALIC, 20));
 		lblnumrep.setBounds(20, 31, 232, 27);
 		panreserv.add(lblnumrep);
 		
-		lbltitre = new JLabel("New label");
+		lbltitre = new JLabel("");
 		lbltitre.setFont(new Font("Tahoma", Font.ITALIC, 20));
 		lbltitre.setBounds(20, 96, 232, 27);
 		panreserv.add(lbltitre);
 		
-		JLabel lblconfig = new JLabel("concert");
+		lblconfig = new JLabel("concert");
 		lblconfig.setFont(new Font("Tahoma", Font.ITALIC, 20));
 		lblconfig.setBounds(20, 159, 232, 27);
 		panreserv.add(lblconfig);
@@ -208,24 +250,14 @@ public class client extends JFrame implements ListSelectionListener {
 			ccirque.setVisible(false);
 		}
 		
-		JLabel lblNewLabel = new JLabel("nombre de places(10max) :");
+		JLabel lblNewLabel = new JLabel("nombre de places :");
 		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 20));
-		lblNewLabel.setBounds(20, 226, 259, 37);
+		lblNewLabel.setBounds(20, 248, 259, 37);
 		panreserv.add(lblNewLabel);
 		
 		JTextArea txtnbrplace = new JTextArea();
-		txtnbrplace.setBounds(320, 226, 207, 32);
+		txtnbrplace.setBounds(232, 36, 207, 32);
 		panreserv.add(txtnbrplace);
-		
-		JButton btnNewButton = new JButton("cliquez ici pour calculer le prix");
-		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 20));
-		btnNewButton.setBounds(551, 233, 320, 23);
-		panreserv.add(btnNewButton);
-		
-		JLabel lblprix = new JLabel("New label");
-		lblprix.setFont(new Font("Tahoma", Font.ITALIC, 20));
-		lblprix.setBounds(20, 290, 136, 27);
-		panreserv.add(lblprix);
 		
 		JLabel lblrecupliv = new JLabel("");
 		lblrecupliv.setFont(new Font("Tahoma", Font.ITALIC, 20));
@@ -234,19 +266,19 @@ public class client extends JFrame implements ListSelectionListener {
 		
 		JComboBox cmlivraison = new JComboBox();
 		cmlivraison.setModel(new DefaultComboBoxModel(new String[] {"", "sur place jour spectacle", "par envoi avec timbre prior", "par envoi securis\u00E9(+10\u20AC)"}));
-		cmlivraison.setBounds(195, 355, 177, 28);
+		cmlivraison.setBounds(218, 341, 177, 28);
 		panreserv.add(cmlivraison);
 
 		recupcombobox(cmlivraison, lblrecupliv);
 		
 		JLabel lblNewLabel_1 = new JLabel("Mode livraison :");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 20));
-		lblNewLabel_1.setBounds(20, 355, 151, 21);
+		lblNewLabel_1.setBounds(20, 341, 151, 21);
 		panreserv.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Mode payement :");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 20));
-		lblNewLabel_2.setBounds(20, 426, 169, 37);
+		lblNewLabel_2.setBounds(25, 416, 169, 37);
 		panreserv.add(lblNewLabel_2);
 		
 		JLabel lbrecuppay = new JLabel("");
@@ -256,7 +288,7 @@ public class client extends JFrame implements ListSelectionListener {
 		
 		JComboBox cmpayement = new JComboBox();
 		cmpayement.setModel(new DefaultComboBoxModel(new String[] {"", "Visa ", "PayPal", "Virement SEPA"}));
-		cmpayement.setBounds(199, 426, 173, 27);
+		cmpayement.setBounds(218, 425, 173, 27);
 		panreserv.add(cmpayement);
 
 		recupcombobox(cmpayement, lbrecuppay);
@@ -264,16 +296,30 @@ public class client extends JFrame implements ListSelectionListener {
 		JButton btnreserver = new JButton("r\u00E9server");
 		btnreserver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				int idrep=Integer.valueOf(lblnumrep.getText());
-				int nbre_place=Integer.valueOf(txtnbrplace.getText());
+				int nbre_place=Integer.valueOf(lblplace.getText());
 				lblrecupliv.getText();
 				lbrecuppay.getText();
 				int idcli=Integer.valueOf(id);
-				int  h=com.recup_dernier_comm();;
-
-				//reservation_client(int idc,int nbre_place,String ml,String mp,int idrep)
-				com.reservation_client(idcli,nbre_place, lblrecupliv.getText(), lbrecuppay.getText(), idrep);
-				place.creation_place(h+1, idrep, nbre_place);
+				int  h=com.recup_dernier_comm();				
+				int k=place.nbre_place_encore_dispo(lblrecupcat.getText(), lblnumrep.getText());
+				double montanttotal;
+				
+				if(k>nbre_place) {
+					com.reservation_client(idcli,nbre_place, lblrecupliv.getText(), lbrecuppay.getText(), idrep,lblrecupcat.getText());					
+					montanttotal=com.cout(lblrecupcat.getText(),lblnumrep.getText(),nbre_place);
+				    place.creation_place(h+1, idrep, nbre_place);
+					int resultat=k-nbre_place;
+					Categorie cat=new Categorie();
+					cat.settypecat(lblrecupcat.getText());
+					cat.decrementer_nbre_place(lblrecupcat.getText(),String.valueOf(resultat),lblnumrep.getText());
+					JOptionPane.showMessageDialog(null, "votre reservation pour un montant de "+ montanttotal +" € a bien été effectué,vous recevrez les détails de votre réservation sur votre adresse mail");	
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "il ne reste que "+k+" place(s) disponibles pour la catégories "+lblrecupcat.getText());
+				}
+				
 			}
 		});
 		btnreserver.setFont(new Font("Tahoma", Font.ITALIC, 20));
@@ -285,35 +331,17 @@ public class client extends JFrame implements ListSelectionListener {
 		lblcat.setBounds(468, 154, 113, 37);
 		panreserv.add(lblcat);
 		
-		JPanel panmesreservation = new JPanel();
-		panmesreservation.setBackground(Color.ORANGE);
-		tabbedPane.addTab("Mes r\u00E9servations", null, panmesreservation, null);
-		panmesreservation.setLayout(null);
+		JComboBox cmbplace = new JComboBox();
+		cmbplace.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		cmbplace.setBounds(218, 257, 177, 27);
+		panreserv.add(cmbplace);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(118, 102, 638, 372);
-		panmesreservation.add(scrollPane_1);
+		lblplace = new JLabel("");
+		lblplace.setFont(new Font("Tahoma", Font.ITALIC, 20));
+		lblplace.setBounds(483, 248, 98, 37);
+		panreserv.add(lblplace);
 		
-		table_mesreserv = new JTable();
-		table_mesreserv.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"titre", "date", "heure"
-			}
-		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			boolean[] columnEditables = new boolean[] {
-				false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		scrollPane_1.setViewportView(table_mesreserv);
+		recupcombobox(cmbplace,lblplace);
 		
 		JPanel panelsedeconnecter = new JPanel();
 		panelsedeconnecter.setBackground(Color.ORANGE);
@@ -332,29 +360,4 @@ public class client extends JFrame implements ListSelectionListener {
 		btnsedeconnecter.setBounds(269, 277, 348, 54);
 		panelsedeconnecter.add(btnsedeconnecter);
 	}
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		int[] sel;
-		int[] col;
-	
-		try {
-	      sel = table.getSelectedRows();
-	      col=table.getSelectedColumns();
-         //donc faut dire que le premier je clique ou je veux dans nom_ut par exemple donc 
-	      //leur dire de cliquer sur le nom du spectacle qu il veulent
-		  int i=(int) table.getValueAt(sel[0], col[0]);
-		  String t = String.valueOf(i);
-	      lblnumrep.setText(t);
-	      lbltitre.setText((String)table.getValueAt(sel[0],1));
-		}
-		catch(Exception ex) {
-			txtpnexpli.setText("Attention,Cliquez sur le N° de la représentation que vous souhaitez réserver.Ensuite, allez dans l'onglet \r\n"
-					+ "réserver pour continuer votre réservation.");
-			txtpnexpli.setForeground(Color.RED);
-		}
-
-	}
-	/*public void setValueAt(JTable value, int row, int col) {
-       value.editCellAt(row, col);
-    }*/
 }

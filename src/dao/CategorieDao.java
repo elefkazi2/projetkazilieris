@@ -27,10 +27,10 @@ public class CategorieDao extends DAO<Categorie>{
 	}
 
 	@Override
-	public boolean update(Categorie obj, String s) {
+	public boolean update(Categorie obj, String s,String idrep) {
 		try{
 			String modif = "UPDATE categorie SET nbrplacedispo ='"+s+"' " +"WHERE type='"+obj.gettypecat()+"'"
-					+ " and idconfig='"+obj.getconf().getidconfig()+"'";
+					+ " and idconfig='"+obj.recup_idconfig(obj.gettypecat(), idrep)+"'";
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeUpdate(modif);	

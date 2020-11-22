@@ -218,12 +218,12 @@ public class connexionouregister extends JFrame {
 						fermer();//fermer cette fenetre avec methode en haut
 						break;
 					case "gestionnaire":
-						gestionnaire g=new gestionnaire(textField1.getText());
+						gestionnaire g=new gestionnaire(textField1.getText(),n);
 						g.setVisible(true);
 						fermer();
 						break;
 					case "organisateur":
-						organisateur o=new organisateur(textField1.getText());
+						organisateur o=new organisateur(textField1.getText(),n);
 						o.setVisible(true);
 						fermer();
 						break;

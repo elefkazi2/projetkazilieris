@@ -35,11 +35,12 @@ public class gestionnaire extends JFrame {
 	/**
 	 * Create the frame.
 	 * @param nom_ut 
+	 * @param n 
 	 */
-	public gestionnaire(String nom_ut) {
+	public gestionnaire(String nom_ut, String n) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		setTitle("SalleBosquetWallon/Gestionnaire/"+nom_ut);
+		setTitle("SalleBosquetWallon/Gestionnaire/"+n+"/"+nom_ut);
 		setSize(900,700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

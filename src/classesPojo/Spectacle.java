@@ -53,6 +53,9 @@ public class Spectacle {
 	public configuration getconfig() {
 		return config;
 	}
+	public void setconfig(configuration c) {
+		config=c;
+	}
 
 	public Set<Representation> getListrepresentation() {
 		return listrepresentation;

@@ -38,4 +38,7 @@ public class configuration {
 	public Categorie getcat(){
 		return categorie;
 	}
+	public void setcat(Categorie c){
+		categorie=c;
+	}
 }

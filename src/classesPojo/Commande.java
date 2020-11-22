@@ -1,7 +1,5 @@
 package classesPojo;
 
-import java.util.List;
-
 import dao.AbstractDAOFactory;
 import dao.DAO;
 
@@ -17,11 +15,12 @@ public class Commande {
 	DAO<Commande> commandedao =adf.getc();
 	
 	public Commande() {}
-	public Commande(String ml,String mp/*,Place p*/,int ic) {
+	public Commande(String ml,String mp,double cout,int ic) {
 	
 		modelivraison=ml;
 		modepayement=mp;
 		//place=p;
+		this.cout=cout;
 		id_cli=ic;
 	}
 	public int getid() {
@@ -39,18 +38,29 @@ public class Commande {
 	public void setidclient(int i) {
 		id_cli=i;
 	}
+	public double getcoutbon() {
+		return cout;
+	}
 	public Place getplacom() {
 		return place;
 	}
-	public void reservation_client(int idc,int nbre_place,String ml,String mp,int idrep) {
-		Commande c =new Commande(ml,mp,idc);
-		commandedao.create(c);
+	public void reservation_client(int idc,int nbre_place,String ml,String mp,int idrep,String typecat) {
+		if(mp.equals("par envoi securisé(+10€)")) {
+			double t=cout(typecat,String.valueOf(idrep),nbre_place)+10;
+			Commande c =new Commande(ml,mp,t,idc);
+			commandedao.create(c);
+		}
+		else {
+			Commande c =new Commande(ml,mp,cout(typecat,String.valueOf(idrep),nbre_place),idc);
+			commandedao.create(c);
+		}
 	}
 	public int recup_dernier_comm(){
 		return commandedao.find();
 	}	
-	public double getcout(String typecat, String idrep,int nbreplace) {
-		int y=place.getprix(typecat, idrep);		
+	public double cout(String typecat, String idrep,int nbreplace) {
+		Place p=new Place();
+		int y=p.prix(typecat, idrep);		
 		return (double) y*nbreplace;
 	}
 }

@@ -17,7 +17,7 @@ public class CommandeDao extends DAO<Commande>{
 	@Override
 	public boolean create(Commande obj) {
 		try{
-			String insertion = "INSERT INTO commande(modepayement,modelivraison,id) values ('"+obj.getmp()+"','" + obj.getml()+ "','"+obj.getidclient()+"')";
+			String insertion = "INSERT INTO commande(modepayement,modelivraison,cout,id) values ('"+obj.getmp()+"','" + obj.getml()+ "','"+obj.getcoutbon()+"','"+obj.getidclient()+"')";
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeUpdate(insertion);	
@@ -35,7 +35,7 @@ public class CommandeDao extends DAO<Commande>{
 	}
 
 	@Override
-	public boolean update(Commande obj, String s) {
+	public boolean update(Commande obj, String s,String idrep) {
 		// TODO Auto-generated method stub
 		return false;
 	}

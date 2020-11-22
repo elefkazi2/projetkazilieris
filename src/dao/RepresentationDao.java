@@ -26,7 +26,7 @@ public class RepresentationDao  extends DAO<Representation>{
 	}
 
 	@Override
-	public boolean update(Representation obj, String s) {
+	public boolean update(Representation obj, String s,String idrep) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -15,7 +15,7 @@ protected Connection connect = null;
 	
 	public abstract boolean delete(T obj);
 	
-	public abstract boolean update(T obj,String s);
+	public abstract boolean update(T obj,String s,String idrep);
 	
 	public abstract List<String> find(String n,String p);
 	

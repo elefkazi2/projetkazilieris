@@ -8,13 +8,11 @@ public class Place {
 	private int id;
 	private int ref_commande;
 	private int id_rep;
-	private int prix;
 	private Representation representation; 
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Place> placedao =adf.getplace();
 	
 	public Place(int rc,int idrep) {
-		//this.representation=representation;
 		ref_commande=rc;
 		this.id_rep=idrep;
 	}
@@ -31,8 +29,16 @@ public class Place {
 	public Representation getrepplace() {
 		return representation;
 	}
-	public int getprix(String typecat, String idrep) {
-		String h=representation.getspect().getconfig().getcat().recup_prix_et_nbreplacedispo(typecat, idrep).get(1);		
+	public int prix(String typecat, String idrep) {
+		Representation r=new Representation();
+		Spectacle s=new Spectacle();
+		configuration c=new configuration();	
+		Categorie cat=new Categorie();
+		r.setspect(s);
+		r.getspect().setconfig(c);
+		r.getspect().getconfig().setcat(cat);
+		
+		String h=r.getspect().getconfig().getcat().recup_prix_et_nbreplacedispo(typecat, idrep).get(1);
 		return Integer.valueOf(h);
 	}
 	public void creation_place(int refcomm, int idrep, int nbre_place) {
@@ -41,7 +47,16 @@ public class Place {
 		placedao.create(c);
 		}
 	}
-	public void place_dispo_(String typecat, String idrep) {
-		String h=representation.getspect().getconfig().getcat().recup_prix_et_nbreplacedispo(typecat, idrep).get(1);
+	public int nbre_place_encore_dispo(String typecat, String idrep) {
+		Representation r=new Representation();
+		Spectacle s=new Spectacle();
+		configuration c=new configuration();	
+		Categorie cat=new Categorie();
+		r.setspect(s);
+		r.getspect().setconfig(c);
+		r.getspect().getconfig().setcat(cat);
+		
+		String h=r.getspect().getconfig().getcat().recup_prix_et_nbreplacedispo(typecat, idrep).get(0);
+		return Integer.valueOf(h);
 	}
 }

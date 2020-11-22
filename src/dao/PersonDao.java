@@ -38,17 +38,7 @@ public class PersonDao extends DAO<Personne>{
 		}
 		return false;
 	}
-	public boolean update(Personne obj,String s) {		
-		try{
-			String modif = "UPDATE person SET nom ='"+s+"' "//',"
-					/*+ "prenom = '"+obj.getpr()+"', password = '"+obj.getpa()+"'*/ +"WHERE nom='"+obj.getn()+"'";
-			this.connect.createStatement(
-					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate(modif);	
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-		}
+	public boolean update(Personne obj,String s,String idrep) {		
 		return false;
 	}
 	public List<String> find(String n,String p) {

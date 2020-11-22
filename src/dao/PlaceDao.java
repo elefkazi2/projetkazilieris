@@ -39,7 +39,7 @@ public class PlaceDao extends DAO<Place>{
 	}
 
 	@Override
-	public boolean update(Place obj, String s) {
+	public boolean update(Place obj, String s,String idrep) {
 		// TODO Auto-generated method stub
 		return false;
 	}

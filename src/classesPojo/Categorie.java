@@ -31,6 +31,9 @@ public class Categorie {
 	public String gettypecat() {
 		return type;
 	}
+	public void settypecat(String h) {
+		type=h;
+	}
 	public configuration getconf() {
 		return conf;
 	}
@@ -42,5 +45,18 @@ public class Categorie {
 	}
 	public List<String> recup_prix_et_nbreplacedispo(String typecat,String idrep){
 		return catdao.find(typecat, idrep);
+	}
+	public int recup_idconfig(String typecat, String idrep) {
+		configuration c=new configuration();	
+		Categorie cat=new Categorie();
+		c.setcat(cat);
+		
+		String h=c.getcat().recup_prix_et_nbreplacedispo(typecat, idrep).get(2);
+		return Integer.valueOf(h);
+	}
+	public void decrementer_nbre_place(String typecat,String nbrefinal, String idrep) {
+		Categorie c=new Categorie();
+		c.settypecat(typecat);
+		catdao.update(c, nbrefinal, idrep);
 	}
 }

@@ -27,7 +27,7 @@ public class SpectacleDao extends DAO<Spectacle>{
 	}
 
 	@Override
-	public boolean update(Spectacle obj, String s) {
+	public boolean update(Spectacle obj, String s,String idrep) {
 		// TODO Auto-generated method stub
 		return false;
 	}
