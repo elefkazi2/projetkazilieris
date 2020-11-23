@@ -10,6 +10,7 @@ public class Representation {
 	private Date date;
 	private String heured;
 	private String heuref;
+	private int idspect;
 	private Spectacle spectacle;	
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Representation> repdao =adf.getr();
@@ -22,11 +23,20 @@ public class Representation {
 		heuref=hf;
 		spectacle=s;
 	}
+	public Representation(Date d,String hd,String hf,int idspect) {
+		date=d;
+		heured=hd;
+		heuref=hf;
+		this.idspect=idspect;
+	}
 	
 	public Representation() {}
 	
 	public int getidr() {
 		return id;
+	}
+	public int getids() {
+		return idspect;
 	}
 	public Date getdater() {
 		return date;

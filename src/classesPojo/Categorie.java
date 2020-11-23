@@ -9,8 +9,10 @@ public class Categorie {
 
 	private int id;
 	private String type;
+	private double prix;
 	private int nbreplacedispo;
 	private int nbreplacemax;
+	private int idconf;
 	private configuration conf;
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Categorie> catdao = adf.getcat();
@@ -21,6 +23,13 @@ public class Categorie {
 		nbreplacedispo=nd;
 		nbreplacemax=nm;
 		conf=c;
+	}
+	public Categorie(String t,double p,int nd,int nm,int ic) {
+		type=t;
+		prix=p;
+		nbreplacedispo=nd;
+		nbreplacemax=nm;
+		idconf=ic;
 	}
 	
 	public Categorie() {}
@@ -42,6 +51,12 @@ public class Categorie {
 	}
 	public int getmaxt() {
 		return nbreplacemax;
+	}
+	public int getic() {
+		return idconf;
+	}
+	public double getp() {
+		return prix;
 	}
 	public List<String> recup_prix_et_nbreplacedispo(String typecat,String idrep){
 		return catdao.find(typecat, idrep);

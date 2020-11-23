@@ -16,7 +16,16 @@ public class SpectacleDao extends DAO<Spectacle>{
 
 	@Override
 	public boolean create(Spectacle obj) {
-		// TODO Auto-generated method stub
+		try{
+			String insertion = "INSERT INTO spectacle(titre,nbreplaceparclient,idplaning) "
+					+ "values ('"+obj.gettitr()+"','" + obj.getnpc()+ "','"+obj.getIdplan()+"')";
+			this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeUpdate(insertion);	
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 		return false;
 	}
 

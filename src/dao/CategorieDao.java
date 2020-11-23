@@ -16,7 +16,17 @@ public class CategorieDao extends DAO<Categorie>{
 
 	@Override
 	public boolean create(Categorie obj) {
-		// TODO Auto-generated method stub
+		try{
+			String insertion = "INSERT INTO categorie(type,prix,nbrplacedispo,nbrplacemax,idconfig) "
+					+ "values ('"+obj.gettypecat()+"','" + obj.getp()+ "','"+obj.getdispo()+"',"
+					+"'"+obj.getmaxt()+"','"+obj.getic()+"')";
+			this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeUpdate(insertion);	
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 		return false;
 	}
 

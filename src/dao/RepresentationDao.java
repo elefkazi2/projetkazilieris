@@ -15,7 +15,17 @@ public class RepresentationDao  extends DAO<Representation>{
 
 	@Override
 	public boolean create(Representation obj) {
-		// TODO Auto-generated method stub
+		try{
+			String insertion = "INSERT INTO representation(daterepresentation,heuredebut,heurefin,idspectacle)"
+					+ " values ('"+obj.getdater()+"','" + obj.getheured()+ "','"+obj.getheuref()+"',"
+					+"'"+obj.getids()+"')";
+			this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeUpdate(insertion);	
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 		return false;
 	}
 

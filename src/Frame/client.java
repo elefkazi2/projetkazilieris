@@ -135,8 +135,8 @@ public class client extends JFrame {
 		
 		txtpnexpli = new JTextPane();
 		txtpnexpli.setForeground(new Color(0, 0, 0));
-		txtpnexpli.setFont(new Font("Tahoma", Font.BOLD, 22));
-		txtpnexpli.setText("Veuillez noter le N\u00B0,le titre et la configuration de la repr\u00E9sentation que vous souhaitez r\u00E9server dans les champs appropri\u00E9s en bas du tableau des repr\u00E9sentations.Ensuite, allez dans l'onglet R\u00E9server pour continuer votre r\u00E9servation.");
+		txtpnexpli.setFont(new Font("Tahoma", Font.BOLD, 24));
+		txtpnexpli.setText("Veuillez noter le N\u00B0,le titre et la configuration de la repr\u00E9sentation que vous souhaitez r\u00E9server dans les champs appropri\u00E9s en bas du tableau des repr\u00E9sentations et appuyez sur continuer.");
 		txtpnexpli.setBounds(31, 11, 820, 109);
 		listespectrep.add(txtpnexpli);
 		

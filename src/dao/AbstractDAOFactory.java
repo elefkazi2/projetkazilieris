@@ -13,6 +13,9 @@ public abstract class AbstractDAOFactory {
 	public abstract DAO<Place> getplace();
 	public abstract DAO<Commande> getc();
 	public abstract DAO<Categorie> getcat();
+	public abstract DAO<Reservation> getres();
+	public abstract DAO<configuration> getconf();
+	public abstract DAO<PlaningSalle> getpl();
 		
 	public static AbstractDAOFactory getFactory(int type){
 		switch(type){

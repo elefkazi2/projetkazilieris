@@ -6,18 +6,24 @@ public class configuration {
 	
 	private int id;
 	private String type;
-	private Spectacle spectacle;
-	private Representation rep;
+	private int idspect;
+	private int idrep;
+	//private Spectacle spectacle;
+	//private Representation rep;
 	private Categorie categorie;
 	//private Set<Categorie> listecategorie=new HashSet<>();
 	
-	public configuration(int i,String t,Spectacle s,Representation r) {
+	/*public configuration(int i,String t,Spectacle s,Representation r) {
 		id=i;
 		type=t;
 		spectacle=s;
 		rep=r;
+	}*/
+	public configuration(String t,int is,int ir) {
+		type=t;
+		idspect=is;
+		idrep=ir;
 	}
-	
 	public configuration() {}
 	
 	public int getidconfig() {
@@ -26,14 +32,14 @@ public class configuration {
 	public String gettypeconfig() {
 		return type;
 	}
-	public Representation getrep() {
-		return rep;
+	public int getrep() {
+		return idrep;
 	}
-	public Spectacle getspect() {
-		return spectacle;
+	public int getspect() {
+		return idspect;
 	}
-	public void setspect(Spectacle s) {
-		spectacle=s;
+	public void setspect(int s) {
+		idspect=s;
 	}
 	public Categorie getcat(){
 		return categorie;

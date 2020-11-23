@@ -10,21 +10,28 @@ public class Spectacle {
 	
 	private int id;
 	private String titre;
+	private String artiste;
 	private int nbreplaceparclient;
-	private Set<Representation> listrepresentation;//= new HashSet<>();
+	private int idplaning;
+	private Set<Representation> listrepresentation;
 	//private Set<Artiste> listartiste = new HashSet<>();
 	private configuration config;
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Spectacle> sdao =adf.gets();
 	
-	public Spectacle(int id, String t, int n/*,configuration c*/) {
+	public Spectacle(int id, String t,int npc/*,configuration c*/) {
 		this.id = id;
 		titre = t;
-		nbreplaceparclient = n;
+		nbreplaceparclient=npc;
 		//config=c;
 		listrepresentation = new HashSet<>();
 	}
-
+	public Spectacle(String t,String a,int npc,int idplaning) {
+		titre=t;
+		artiste=a;
+		nbreplaceparclient=npc;
+		this.idplaning=idplaning;
+	}
 	public Spectacle(){}
 
 	public int getId() {
@@ -33,6 +40,9 @@ public class Spectacle {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getnpc() {
+		return nbreplaceparclient;
 	}
 
 	public String gettitr() {
@@ -43,12 +53,19 @@ public class Spectacle {
 		this.titre = t;
 	}
 
-	public int getnbrplace() {
-		return nbreplaceparclient;
+	public String getart() {
+		return artiste;
 	}
 
-	public void setnplace(int n) {
-		this.nbreplaceparclient = n;
+	public void setart(String n) {
+		this.artiste = n;
+	}
+	public int getIdplan() {
+		return idplaning;
+	}
+
+	public void setIdplan(int id) {
+		this.idplaning = id;
 	}
 	public configuration getconfig() {
 		return config;

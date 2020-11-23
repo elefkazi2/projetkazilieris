@@ -26,4 +26,13 @@ protected static final Connection conn = connexion.connection.getInstance();
 	public DAO<Categorie> getcat(){
 		return new CategorieDao(conn);
 	}
+	public DAO<Reservation> getres() {
+		return new ReservationDao(conn);
+	}
+	public DAO<configuration> getconf() {
+		return new configurationDao(conn);
+	}
+	public DAO<PlaningSalle> getpl() {
+		return new PlaningSalleDao(conn);
+	}
 }

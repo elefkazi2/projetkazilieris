@@ -7,6 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Color;
+import com.toedter.calendar.JCalendar;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class gestionnaire extends JFrame {
 
@@ -31,7 +36,9 @@ public class gestionnaire extends JFrame {
 			}
 		});
 	}
-
+	public void fermer() {
+		this.setVisible(false);
+	}
 	/**
 	 * Create the frame.
 	 * @param nom_ut 
@@ -43,14 +50,25 @@ public class gestionnaire extends JFrame {
 		setTitle("SalleBosquetWallon/Gestionnaire/"+n+"/"+nom_ut);
 		setSize(900,700);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.ORANGE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblnomutrecup = new JLabel(nom_ut);
-		lblnomutrecup.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblnomutrecup.setBounds(10, 11, 87, 25);
-		contentPane.add(lblnomutrecup);
+		JCalendar calendar = new JCalendar();
+		calendar.setBounds(126, 173, 582, 326);
+		contentPane.add(calendar);
+		
+		JButton btnNewButton = new JButton("se d\u00E9connecter");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fermer();
+				connexionouregister c=new connexionouregister();
+				c.setVisible(true);
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 17));
+		btnNewButton.setBounds(652, 36, 222, 46);
+		contentPane.add(btnNewButton);
 	}
-
 }
