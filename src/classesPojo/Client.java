@@ -1,11 +1,13 @@
 package classesPojo;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Client extends Personne{
 	
-	private Set<Commande> listcommande =new HashSet<>();
+	private List<Commande> listecommande = new ArrayList<>();
 	
 	public Client() {}
 	public Client(String nu,String n,String pr,String ad,String pa,String r) {
@@ -14,7 +16,7 @@ public class Client extends Personne{
 	public void register(String nu,String n,String pr,String ad,String pa) {
 		super.register(nu, n, pr,ad, pa, "client");		
 	}
-	public  Set<Commande> getcomm(){
-		return listcommande;
+	public List<Commande> getc() {
+		return listecommande;
 	}
 }

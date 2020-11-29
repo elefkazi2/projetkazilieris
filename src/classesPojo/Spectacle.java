@@ -13,18 +13,17 @@ public class Spectacle {
 	private String artiste;
 	private int nbreplaceparclient;
 	private int idplaning;
-	private Set<Representation> listrepresentation;
-	//private Set<Artiste> listartiste = new HashSet<>();
+	private List<Representation> listrepresentation = new ArrayList<>();
 	private configuration config;
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Spectacle> sdao =adf.gets();
-	
-	public Spectacle(int id, String t,int npc/*,configuration c*/) {
+
+	public Spectacle(int id, String t,int npc,String artiste,configuration c) {
 		this.id = id;
 		titre = t;
 		nbreplaceparclient=npc;
-		//config=c;
-		listrepresentation = new HashSet<>();
+		this.artiste=artiste;
+		config=c;
 	}
 	public Spectacle(String t,String a,int npc,int idplaning) {
 		titre=t;
@@ -48,22 +47,21 @@ public class Spectacle {
 	public String gettitr() {
 		return titre;
 	}
-
 	public void settitre(String t) {
 		this.titre = t;
 	}
-
 	public String getart() {
 		return artiste;
 	}
-
 	public void setart(String n) {
 		this.artiste = n;
 	}
 	public int getIdplan() {
 		return idplaning;
 	}
-
+	public int recup_dernier_spec(){
+		return sdao.find();
+	}
 	public void setIdplan(int id) {
 		this.idplaning = id;
 	}
@@ -73,26 +71,17 @@ public class Spectacle {
 	public void setconfig(configuration c) {
 		config=c;
 	}
-
-	public Set<Representation> getListrepresentation() {
+	public List<String> recup_id(String titre,String d){
+		return sdao.find(titre, d);
+	}
+	public List<Representation> getListrepresentation() {
 		return listrepresentation;
 	}
-
-	public void setListrepresentation(Set<Representation> listrepresentation) {
+	public void setListrepresentation(List<Representation> listrepresentation) {
 		this.listrepresentation= listrepresentation;
 	}
-	public void addrepresentation(Representation r){
-		this.listrepresentation.add(r);
-	}
-	/*public void tout_les_spectacles(int id) {
-		Spectacle r=sdao.find(id);
-		this.id=r.id;
-		this.titre=r.titre;
-		this.nbreplaceparclient=r.nbreplaceparclient;
-		setListrepresentation(r.listrepresentation);
-	}*/
-	/*public void removeMatiere(Matiere matiere){
-		this.listMatiere.remove(matiere);
-	}*/
-
+	public void ajout_spectacle(String t,String a,int idplaning) {
+		Spectacle s=new Spectacle(t,a,10,idplaning);
+		sdao.create(s);		
+	}	
 }

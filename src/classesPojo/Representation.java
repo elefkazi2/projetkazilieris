@@ -1,13 +1,11 @@
 package classesPojo;
 
-import java.util.*;
-
 import dao.AbstractDAOFactory;
 import dao.DAO;
 
 public class Representation {
 	private int id;
-	private Date date;
+	private String date;
 	private String heured;
 	private String heuref;
 	private int idspect;
@@ -16,14 +14,14 @@ public class Representation {
 	DAO<Representation> repdao =adf.getr();
 
 	
-	public Representation(int id,Date d,String hd,String hf,Spectacle s) {
+	public Representation(int id,String d,String hd,String hf,Spectacle s) {
 		this.id=id;
 		date=d;
 		heured=hd;
 		heuref=hf;
 		spectacle=s;
 	}
-	public Representation(Date d,String hd,String hf,int idspect) {
+	public Representation(String d,String hd,String hf,int idspect) {
 		date=d;
 		heured=hd;
 		heuref=hf;
@@ -38,7 +36,7 @@ public class Representation {
 	public int getids() {
 		return idspect;
 	}
-	public Date getdater() {
+	public String getdater() {
 		return date;
 	}
 	public String getheured() {
@@ -46,6 +44,9 @@ public class Representation {
 	}
 	public String getheuref() {
 		return heuref;
+	}
+	public int recup_dernier_rep(){
+		return repdao.find();
 	}
 	public Spectacle getspect() {
 		return spectacle;
@@ -56,5 +57,9 @@ public class Representation {
 	public Representation toute_les_representations(int id) {
 		Representation r=repdao.find(id);
 		return new Representation(r.id,r.date,r.heured,r.heuref,r.spectacle);
+	}
+	public void ajout_representation(String d,String hd,String hf,int idspect) {
+		Representation re =new Representation(d,hd,hf,idspect);
+		repdao.create(re);		
 	}
 }

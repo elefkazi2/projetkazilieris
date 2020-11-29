@@ -74,4 +74,8 @@ public class Categorie {
 		c.settypecat(typecat);
 		catdao.update(c, nbrefinal, idrep);
 	}
+	public void ajout_categorie(String t,double p,int nd,int nm,int ic) {
+		Categorie c =new  Categorie(t, p, nd,nm, ic);
+		catdao.create(c);		
+	}
 }

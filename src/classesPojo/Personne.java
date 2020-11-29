@@ -13,7 +13,6 @@ public class Personne {
 	private String adresse;
 	private String password;
 	private String role;
-	private Commande commande;
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Personne> persondao = adf.getp();
 	
@@ -54,9 +53,6 @@ public class Personne {
 	}
 	public String getr() {
 		return role;
-	}
-	public Commande getc() {
-		return commande;
 	}
 	public void setn(String s) {
 		nom=s;

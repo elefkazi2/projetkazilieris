@@ -1,5 +1,8 @@
 package classesPojo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dao.AbstractDAOFactory;
 import dao.DAO;
 
@@ -10,7 +13,7 @@ public class Commande {
 	private String modepayement;
 	private double cout;
 	private int id_cli;
-	Place place;
+	private List<Place> listeplace = new ArrayList<>();
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Commande> commandedao =adf.getc();
 	
@@ -19,7 +22,6 @@ public class Commande {
 	
 		modelivraison=ml;
 		modepayement=mp;
-		//place=p;
 		this.cout=cout;
 		id_cli=ic;
 	}
@@ -41,18 +43,18 @@ public class Commande {
 	public double getcoutbon() {
 		return cout;
 	}
-	public Place getplacom() {
-		return place;
+	public List<Place> getplacom() {
+		return listeplace;
 	}
 	public void reservation_client(int idc,int nbre_place,String ml,String mp,int idrep,String typecat) {
-		if(mp.equals("par envoi securisé(+10€)")) {
+		if(mp.equals("par envoi securisé(+10€)")) {		
 			double t=cout(typecat,String.valueOf(idrep),nbre_place)+10;
 			Commande c =new Commande(ml,mp,t,idc);
 			commandedao.create(c);
 		}
 		else {
-			Commande c =new Commande(ml,mp,cout(typecat,String.valueOf(idrep),nbre_place),idc);
-			commandedao.create(c);
+			Commande c1 =new Commande(ml,mp,cout(typecat,String.valueOf(idrep),nbre_place),idc);
+			commandedao.create(c1);
 		}
 	}
 	public int recup_dernier_comm(){
