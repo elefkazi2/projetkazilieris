@@ -227,11 +227,6 @@ public class connexionouregister extends JFrame {
 						o.setVisible(true);
 						fermer();
 						break;
-					case "artiste":
-						artiste a=new artiste();
-						a.setVisible(true);
-						fermer();
-						break;
 					}					
 				}
 				catch(Exception ex) {				

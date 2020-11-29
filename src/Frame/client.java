@@ -42,6 +42,9 @@ public class client extends JFrame {
 	private JTextPane txtpnexpli;
 	private JLabel lblconfig;
 	private JLabel lblplace;
+	private JComboBox ccirque;
+	private JComboBox cconcert;
+	private JLabel lblrecupcat;
 	Representation rep=new Representation();
 	Spectacle spec=new Spectacle();
 	Commande com=new Commande();
@@ -117,7 +120,7 @@ public class client extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"n\u00B0", "titre", "date", "heure d\u00E9but","configuration"
+				"n\u00B0", "titre", "date", "heure d\u00E9but","configuration","artiste(s)"
 			}
 		) {
 			/**
@@ -125,7 +128,7 @@ public class client extends JFrame {
 			 */
 			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
-				false, false,false, false,false
+				false, false,false, false,false,false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -134,6 +137,7 @@ public class client extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		txtpnexpli = new JTextPane();
+		txtpnexpli.setBackground(Color.ORANGE);
 		txtpnexpli.setForeground(new Color(0, 0, 0));
 		txtpnexpli.setFont(new Font("Tahoma", Font.BOLD, 24));
 		txtpnexpli.setText("Veuillez noter le N\u00B0,le titre et la configuration de la repr\u00E9sentation que vous souhaitez r\u00E9server dans les champs appropri\u00E9s en bas du tableau des repr\u00E9sentations et appuyez sur continuer.");
@@ -173,24 +177,50 @@ public class client extends JFrame {
 		JButton btnNewButton_1 = new JButton("Continuer");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+			try {
+				if( txtnintro.getText().isEmpty() | txttitreintro.getText().isEmpty() | txtconfigintro.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Veillez à remplir tous les champs");					
+				}
+				else {
 					lblnumrep.setText(txtnintro.getText());
 					lbltitre.setText(txttitreintro.getText());
 					lblconfig.setText(txtconfigintro.getText());
 					tabbedPane.setSelectedIndex(1);
+					if(lblconfig.getText().equals("cirque")) {
+						cconcert.setEnabled(false);
+						ccirque.setEnabled(true);
+						lblrecupcat.setText("");
+					}
+					else if(lblconfig.getText().equals("concert")) {
+						cconcert.setEnabled(true);
+						ccirque.setEnabled(false);
+						lblrecupcat.setText("");
+					}
+					else {
+						cconcert.setEnabled(false);
+						ccirque.setEnabled(false);
+						lblrecupcat.setText("debout");
+					}
+				}
 			}
+			catch(Exception ex) {
+				txtnintro.setText(null);
+				txttitreintro.setText(null);
+				txtconfigintro.setText(null);
+			}
+			}	
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 23));
 		btnNewButton_1.setBounds(288, 562, 264, 58);
 		listespectrep.add(btnNewButton_1);
 		
-		
-		for(int i = 1; i <25; i++) {
+		int g=rep.recup_dernier_rep();
+		for(int i = 1; i <=g; i++) {
 		Representation rep1=new Representation();
 	    rep1=rep.toute_les_representations(i);
 		if(rep1.getidr()!=0) {
 		DefaultTableModel model=(DefaultTableModel) table.getModel();
-		Object [] row=new Object[] {rep1.getidr(),rep1.getspect().gettitr(),rep1.getdater(),rep1.getheured(),null,null};
+		Object [] row=new Object[] {rep1.getidr(),rep1.getspect().gettitr(),rep1.getdater(),rep1.getheured(),rep1.getspect().getconfig().gettypeconfig(),rep1.getspect().getart()};
 		model.addRow(row);
 			}
 		 }
@@ -215,21 +245,23 @@ public class client extends JFrame {
 		lblconfig.setBounds(20, 159, 232, 27);
 		panreserv.add(lblconfig);
 		
-		JLabel lblrecupcat = new JLabel("");
+		lblrecupcat = new JLabel("");
 		lblrecupcat.setFont(new Font("Tahoma", Font.ITALIC, 20));
 		lblrecupcat.setBounds(756, 159, 96, 27);
 		panreserv.add(lblrecupcat);
 		
-		JComboBox ccirque = new JComboBox();
+		ccirque = new JComboBox();
+		ccirque.setEnabled(false);
 		ccirque.setModel(new DefaultComboBoxModel(new String[] {"", "diamant ", "or ", "argent ", "bronze"}));
-		ccirque.setBounds(591, 165, 137, 22);
+		ccirque.setBounds(566, 184, 137, 22);
 		panreserv.add(ccirque);
 
 		recupcombobox(ccirque, lblrecupcat);
 		
-		JComboBox cconcert = new JComboBox();
+	    cconcert = new JComboBox();
+	    cconcert.setEnabled(false);
 		cconcert.setModel(new DefaultComboBoxModel(new String[] {"", "or", "argent ", "bronze"}));
-		cconcert.setBounds(591, 165, 137, 22);
+		cconcert.setBounds(566, 143, 137, 22);
 		panreserv.add(cconcert);
 		
 		recupcombobox(cconcert, lblrecupcat);
@@ -239,25 +271,10 @@ public class client extends JFrame {
 		lblcat.setBounds(468, 154, 113, 37);
 		panreserv.add(lblcat);
 		
-		if(lblconfig.getText()=="cirque") {
-			cconcert.setVisible(false);			
-		}
-		else if(lblconfig.getText()=="concert") {
-			ccirque.setVisible(false);
-		}
-		else {
-			cconcert.setVisible(false);
-			ccirque.setVisible(false);
-		}
-		
 		JLabel lblNewLabel = new JLabel("nombre de places :");
 		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 20));
 		lblNewLabel.setBounds(20, 248, 259, 37);
 		panreserv.add(lblNewLabel);
-		
-		JTextArea txtnbrplace = new JTextArea();
-		txtnbrplace.setBounds(232, 36, 207, 32);
-		panreserv.add(txtnbrplace);
 		
 		JLabel lblrecupliv = new JLabel("");
 		lblrecupliv.setFont(new Font("Tahoma", Font.ITALIC, 20));
@@ -296,7 +313,7 @@ public class client extends JFrame {
 		JButton btnreserver = new JButton("r\u00E9server");
 		btnreserver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
 				int idrep=Integer.valueOf(lblnumrep.getText());
 				int nbre_place=Integer.valueOf(lblplace.getText());
 				lblrecupliv.getText();
@@ -319,7 +336,10 @@ public class client extends JFrame {
 				else {
 					JOptionPane.showMessageDialog(null, "il ne reste que "+k+" place(s) disponibles pour la catégories "+lblrecupcat.getText());
 				}
-				
+				}
+				catch(Exception ex) {
+					JOptionPane.showMessageDialog(null, "Veuillez verifier que tout soit correctement rempli");
+				}
 			}
 		});
 		btnreserver.setFont(new Font("Tahoma", Font.ITALIC, 20));
