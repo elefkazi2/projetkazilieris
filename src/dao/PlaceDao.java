@@ -15,14 +15,8 @@ public class PlaceDao extends DAO<Place>{
 
 	@Override
 	public boolean create(Place obj) {
-		//int i=0;
 		try{
-			//ResultSet req;
-			//req = this.connect.createStatement().executeQuery("SELECT count(*) as nbre FROM commande");
-			
-			//while(req.next()) {	
-				//i=req.getInt("nbre");		
-			String insertion = "INSERT INTO place(Refcommande,idrepresentation) values ('"+obj.getrefcommplace()/*i+1*/ +"','" + obj.getidrepplace()+ "')";
+			String insertion = "INSERT INTO place(Refcommande,idrepresentation) values ('"+obj.getrefcommplace()+"','" + obj.getidrepplace()+ "')";
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeUpdate(insertion);	

@@ -47,8 +47,19 @@ public class configurationDao extends DAO<configuration>{
 	}
 	@Override
 	public int find() {
-		// TODO Auto-generated method stub
-		return 0;
+		int g=0;
+		try{
+			ResultSet result = this.connect.createStatement(
+				ResultSet.TYPE_SCROLL_INSENSITIVE,
+	ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM configuration ");
+			if(result.last()) {	
+				g=result.getInt("idconfig");
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return g;
 	}
 
 }

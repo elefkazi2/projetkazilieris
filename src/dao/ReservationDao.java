@@ -18,7 +18,7 @@ public class ReservationDao extends DAO<Reservation>{
 		try{
 			String insertion = "INSERT INTO reservation(accompte,statut,prix,solde,idplaning,id)"
 					+ " values ('"+obj.geta()+"','" + obj.getsta()+ "','"+obj.getp()+"',"
-					+"'"+obj.gets()+"','"+obj.getip()+"','"+obj.getips()+"')";
+					+"'"+obj.gets()+"','"+obj.getips()+"','"+obj.getip()+"')";
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeUpdate(insertion);	

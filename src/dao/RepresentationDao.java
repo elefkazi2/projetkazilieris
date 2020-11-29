@@ -48,43 +48,34 @@ public class RepresentationDao  extends DAO<Representation>{
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery(
 					"SELECT * FROM spectacle "
-			+ "inner join representation ON spectacle.idspectacle = representation.idspectacle "
-			+ "where idrepresentation= '" + id +
+			+ "inner join representation ON spectacle.idspectacle = representation.idspectacle inner join configuration" 
+			+ " on spectacle.idspectacle = configuration.idspectacle where idrepresentation= '" + id +
 			"' ORDER BY daterepresentation ASC");
 			if(result.first()){				
 	rep = new Representation(result.getInt("idrepresentation"),
-			result.getDate("daterepresentation"),result.getString("heuredebut"),result.getString("heurefin"),new Spectacle(result.getInt("idspectacle"),result.getString("titre"),result.getInt("nbreplaceparclient")));	
+			result.getString("daterepresentation"),result.getString("heuredebut"),result.getString("heurefin"),new Spectacle(result.getInt("idspectacle"),result.getString("titre"),result.getInt("nbreplaceparclient"),result.getString("artiste"),new configuration(result.getString("type"),result.getInt("idspectacle"),result.getInt("idrepresentation"))));	
 			}		
 		}
 		catch(SQLException e){
 			e.printStackTrace();
 		}
 		return rep;
-	}
-	/*@Override
-	public Representation find(int id) {
-		Representation rep = new Representation();
-		try{
-			ResultSet result = this.connect.createStatement(
-					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery(
-							"SELECT * FROM representation WHERE idrepresentation = '" + id+"'");
-			if(result.first()){
-	rep = new Representation(id,result.getDate("daterepresentation"), result.getString("heuredebut"),
-			result.getString("heurefin"),new Spectacle(result.getInt("idspectacle"),result.getString("titre"),result.getInt("nbreplaceparclient"))); 
-			}
-			
-		}
-		catch(SQLException e){
-			//e.printStackTrace();
-		}
-		return rep;
-	}*/
-	
+	}	
 	@Override
 	public int find() {
-		// TODO Auto-generated method stub
-		return 0;
+		int g=0;
+		try{
+			ResultSet result = this.connect.createStatement(
+				ResultSet.TYPE_SCROLL_INSENSITIVE,
+	ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM representation ");
+			if(result.last()) {	
+				g=result.getInt("idrepresentation");
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return g;
 	}
 
 	@Override

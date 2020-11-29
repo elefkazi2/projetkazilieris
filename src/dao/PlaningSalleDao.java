@@ -27,7 +27,6 @@ public class PlaningSalleDao extends DAO<PlaningSalle>{
 	}
 	@Override
 	public boolean delete(PlaningSalle obj) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	@Override
@@ -42,13 +41,40 @@ public class PlaningSalleDao extends DAO<PlaningSalle>{
 	}
 	@Override
 	public PlaningSalle find(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		PlaningSalle rep = new PlaningSalle();
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery(
+					"SELECT * FROM spectacle "
+			+ "inner join planingsalle ON spectacle.idplaning = planingsalle.idplaning inner join configuration"
+			+ " on spectacle.idspectacle = configuration.idspectacle "
+			+ "where idplaning= '" + id +
+			"'");
+			if(result.first()){				
+	rep = new PlaningSalle(result.getInt("idplaning"),
+			result.getString("datedebutr"),result.getString("datefinr"),new Spectacle(result.getInt("idspectacle"),result.getString("titre"),result.getInt("nbreplaceparclient"),result.getString("artiste"),new configuration(result.getString("type"),result.getInt("idspectacle"),result.getInt("idrepresentation"))));	
+			}		
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return rep;
 	}
 	@Override
 	public int find() {
-		// TODO Auto-generated method stub
-		return 0;
+		int g=0;
+		try{
+			ResultSet result = this.connect.createStatement(
+				ResultSet.TYPE_SCROLL_INSENSITIVE,
+	ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM planingsalle ");
+			if(result.last()) {	
+				g=result.getInt("idplaning");
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return g;
 	}
-
 }

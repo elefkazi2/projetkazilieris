@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import classesPojo.*;
@@ -17,8 +18,8 @@ public class SpectacleDao extends DAO<Spectacle>{
 	@Override
 	public boolean create(Spectacle obj) {
 		try{
-			String insertion = "INSERT INTO spectacle(titre,nbreplaceparclient,idplaning) "
-					+ "values ('"+obj.gettitr()+"','" + obj.getnpc()+ "','"+obj.getIdplan()+"')";
+			String insertion = "INSERT INTO spectacle(titre,nbreplaceparclient,artiste,idplaning) "
+					+ "values ('"+obj.gettitr()+"','" + obj.getnpc()+ "','" + obj.getart()+ "','"+obj.getIdplan()+"')";
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeUpdate(insertion);	
@@ -41,40 +42,43 @@ public class SpectacleDao extends DAO<Spectacle>{
 		return false;
 	}
 	@Override
-	public Spectacle find(int id) {
-		Spectacle spec=new Spectacle();
-		//Representation rep = new Representation();
+	public int find() {
+		int g=0;
 		try{
 			ResultSet result = this.connect.createStatement(
-					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery(
-							"SELECT * FROM spectacle "
-									+ "LEFT JOIN representation ON spectacle.idspectacle = representation.idspectacle "
-														+ "AND representation.idspectacle= '" + id +
-						"'");
-			if(result.first()){
-				spec=new Spectacle(id/*result.getInt("idspectacle")*/,result.getString("titre"),result.getInt("nbreplaceparclient"));
-	             result.beforeFirst();
-					RepresentationDao r=new RepresentationDao(connect);
-					while(result.next())
-						spec.addrepresentation(r.find(result.getInt("idrepresentation")));
+				ResultSet.TYPE_SCROLL_INSENSITIVE,
+	ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM spectacle ");
+			if(result.last()) {	
+				g=result.getInt("idspectacle");
 			}
-			
 		}
 		catch(SQLException e){
 			e.printStackTrace();
 		}
-		return spec;
+		return g;
 	}
-
-	@Override
-	public int find() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	@Override
 	public List<String> find(String n, String p) {
+		List<String> listA = new ArrayList<>();
+		int r = 0;
+		try{
+			ResultSet result = this.connect.createStatement(
+				ResultSet.TYPE_SCROLL_INSENSITIVE,
+	ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM spectacle WHERE titre = '" +n+"' ");//and datedebutr ='"+p+"'");
+			if(result.first()) {	
+				r=result.getInt("idspectacle");
+				String f=String.valueOf(r);
+				listA.add(f);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return listA;
+	}
+
+	@Override
+	public Spectacle find(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -27,15 +27,6 @@ public class PersonDao extends DAO<Personne>{
 		return false;
 	}
 	public boolean delete(Personne obj) {
-		try{
-			String supp = "DELETE * FROM person WHERE nom ='" + obj.getn()+ "' and prenom = '"+obj.getpr()+"'";
-			this.connect.createStatement(
-					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate(supp);	
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-		}
 		return false;
 	}
 	public boolean update(Personne obj,String s,String idrep) {		
