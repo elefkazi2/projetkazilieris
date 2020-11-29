@@ -88,7 +88,7 @@ public class gestionnaire extends JFrame {
 		scrollPane.setBounds(82, 125, 734, 437);
 		contentPane.add(scrollPane);
 		
-		int l=pl.recup_dernier_pl();
+		int l=rep.recup_dernier_rep();
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
