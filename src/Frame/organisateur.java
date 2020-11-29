@@ -113,7 +113,7 @@ public class organisateur extends JFrame {
 		panelplasalle.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(80, 148, 734, 437);
+		scrollPane.setBounds(80, 127, 734, 437);
 		panelplasalle.add(scrollPane);
 		
 		int l=pl.recup_dernier_pl();
@@ -156,6 +156,13 @@ public class organisateur extends JFrame {
 		txtpnPlaningDesDates.setText("                 Planing des dates d\u00E9j\u00E0 prises.\r\nAllez dans l'onglet R\u00E9server spectacle pour continuer.");
 		txtpnPlaningDesDates.setBounds(70, 34, 778, 95);
 		panelplasalle.add(txtpnPlaningDesDates);
+		
+		JTextPane txtpnjourPartir = new JTextPane();
+		txtpnjourPartir.setBackground(Color.ORANGE);
+		txtpnjourPartir.setFont(new Font("Tahoma", Font.BOLD, 19));
+		txtpnjourPartir.setText("4500\u20AC/jour \u00E0 partir de vendredi ou samedi et 3000\u20AC/jour pour les autres.");
+		txtpnjourPartir.setBounds(90, 575, 724, 33);
+		panelplasalle.add(txtpnjourPartir);
 		
 		Panel panel_reserver = new Panel();
 		panel_reserver.setBackground(Color.ORANGE);

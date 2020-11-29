@@ -51,7 +51,8 @@ public class Reservation {
 			resdao.create(res);
 		}
 		else {
-			double p=3000;
+			double p=3000*nbr_jour;
+			this.prix=p;
 			double s=p-a;
 			Reservation res=new Reservation(a, p, s,st,ips,ip);
 			resdao.create(res);
